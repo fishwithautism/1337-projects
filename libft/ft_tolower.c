@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
-int	ft_tolower(const char *s, int c)
+int	ft_tolower(int c)
 {
-	return (c += 32);
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
 }

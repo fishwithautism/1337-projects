@@ -1,0 +1,13 @@
+# Object files
+*.o
+
+# Libraries
+*.a
+
+# Executables
+*.out
+a.out
+
+# Test files
+test_*
+!test_*.c
