@@ -1,5 +1,3 @@
-#include <stdlib.h>
-
 static int	count_digits(int n)
 {
 	int	count;
