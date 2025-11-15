@@ -39,25 +39,28 @@ static void	free_all(char **arr, int size)
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
-	int		i[3];
+	char			**split;
+	unsigned int	fp;
+	unsigned int	i;
+	unsigned int	lp;
 
-	if (!s || !(result = malloc(sizeof(char *) * (count_words(s, c) + 1))))
+	if (!s || !(split = ft_calloc(num_words(s, c) + 1, sizeof(char *))))
 		return (NULL);
-	i[0] = 0;
-	i[1] = 0;
-	while (i[1] < count_words(s, c))
+	fp = 0;
+	i = 0;
+	while (i < (unsigned int)num_words(s, c))
 	{
-		while (s[i[0]] == c)
-			i[0]++;
-		i[2] = i[0];
-		while (s[i[2]] && s[i[2]] != c)
-			i[2]++;
-		if (!(result[i[1]] = ft_substr(s, i[0], i[2] - i[0])))
-			return (free_all(result, i[1]), NULL);
-		i[0] = i[2];
-		i[1]++;
+		while (s[fp] && s[fp] == c)
+			fp++;
+		lp = fp;
+		while (s[lp] && s[lp] != c)
+			lp++;
+		split[i] = ft_substr(s, fp, lp - fp);
+		if (!split[i])
+			return (clear_split(split, i));
+		fp = lp;
+		i++;
 	}
-	result[i[1]] = NULL;
-	return (result);
+	split[i] = NULL;
+	return (split);
 }
