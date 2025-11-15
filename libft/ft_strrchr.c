@@ -10,3 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+char	*ft_strrchr(const char *s, int c)
+{
+	char	*end;
+
+	if ((char)c == '\0')
+		return ((char *)s + ft_strlen(s));
+	end = (char *)s + ft_strlen(s);
+	while (--end >= (char *)s)
+		if (*end == (char)c)
+			return (end);
+	return (NULL);
+}
