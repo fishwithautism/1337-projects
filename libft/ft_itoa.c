@@ -17,7 +17,7 @@ char	*ft_itoa(int n)
 {
 	char	*str;
 	int		len;
-	long	num;
+	long	long	num;
 
 	num = n;
 	len = count_digits(num);
