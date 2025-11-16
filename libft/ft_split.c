@@ -19,6 +19,8 @@ static int	count_words(char const *s, char c)
 
 	count = 0;
 	in_word = 0;
+	if (!s)
+		return (-1);
 	while (*s)
 	{
 		if (*s != c && !in_word && (in_word = 1))
@@ -27,10 +29,10 @@ static int	count_words(char const *s, char c)
 			in_word = 0;
 		s++;
 	}
-	return (count);
+	return (count + 1);
 }
 
-static void	free_all(char **arr, int size)
+static void	clear_split(char **arr, int size)
 {
 	while (size-- > 0)
 		free(arr[size]);
@@ -40,15 +42,16 @@ static void	free_all(char **arr, int size)
 char	**ft_split(char const *s, char c)
 {
 	char			**split;
-	unsigned int	fp;
+	unsigned int	firstp;
 	unsigned int	i;
-	unsigned int	lp;
+	unsigned int	lastp;
 
-	if (!s || !(split = ft_calloc(num_words(s, c) + 1, sizeof(char *))))
+	split = ft_calloc(count_words(s, c), sizeof(char *))
+	if (!split)	
 		return (NULL);
 	fp = 0;
 	i = 0;
-	while (i < (unsigned int)num_words(s, c))
+	while (i < (unsigned int)count_words(s, c) - 1)
 	{
 		while (s[fp] && s[fp] == c)
 			fp++;
@@ -61,6 +64,5 @@ char	**ft_split(char const *s, char c)
 		fp = lp;
 		i++;
 	}
-	split[i] = NULL;
 	return (split);
 }
